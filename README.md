@@ -3,7 +3,7 @@ Smooth UI for Credit Card Entry on Android device, perform check for supported c
 
 
 
-Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.io/#KingsMentor/Luhn) introduces:
+Current Verion  [ ![Download](https://api.bintray.com/packages/kingsmentor/maven/Luhn/images/download.svg) ](https://bintray.com/kingsmentor/maven/Luhn/_latestVersion) introduces:
 * Luhn Verification Algorithm
 * Smooth UI
 * Info about card details
@@ -44,20 +44,10 @@ See demo by downloading [Demo Apk](https://github.com/KingsMentor/Luhn/blob/mast
 
 #### adding as a dependency
 
-##### Step 1. 
-Add the JitPack repository to your build file in your root build.gradle at the end of repositories:
-
-	allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
-	}
-##### Step 2. 
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v2.1.3'
+	        compile 'xyz.belvi.validator:luhn:2.1.3'
 	}
 
 You can also use  `master-SNAPSHOT` instead. This always contains stable builds (with new fixes) prior to a new release. 
