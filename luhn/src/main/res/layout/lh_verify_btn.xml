@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.v7.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/btn_proceed"
+<!--<android.support.v7.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:id="@+id/btn_proceed"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="bottom"--><!--android:layout_margin="16dp"--><!--android:background="@drawable/card_next_btn_selector"--><!--android:clickable="false"--><!--android:enabled="false"--><!--android:gravity="center"--><!--android:padding="16dp"--><!--android:text="Next"--><!--android:textColor="@color/ln_colorWhite"--><!--android:textSize="16sp" />-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_margin="16dp"
-    android:background="@drawable/card_next_btn_selector"
-    android:clickable="false"
-    android:enabled="false"
-    android:gravity="center"
-    android:padding="16dp"
-    android:text="Next"
-    android:textColor="@color/ln_colorWhite"
-    android:textSize="16sp" />
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:background="@drawable/make_repayment_bg"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+
+        <Button
+            android:id="@+id/btn_proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Add Card"
+            android:textColor="@color/ln_colorWhite"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,21 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:layout_marginBottom="16sp"
-    android:background="?attr/colorPrimary"
-    app:theme="@style/ToolbarStyle"
-    app:titleTextColor="@color/ln_colorWhite">
+<!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--android:id="@+id/toolbar"--><!--android:layout_width="match_parent"--><!--android:layout_height="?attr/actionBarSize"--><!--android:layout_marginBottom="16sp"--><!--android:background="?attr/colorPrimary"--><!--app:theme="@style/ToolbarStyle"--><!--app:titleTextColor="@color/ln_colorWhite">-->
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/toolbar_title"
+<!--<android.support.v7.widget.AppCompatTextView--><!--android:id="@+id/toolbar_title"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:gravity="center_vertical"--><!--android:textColor="@color/ln_actionMenuTextColor"--><!--android:textSize="@dimen/ln_toolbar_title_size" />--><!----><!----><!--</android.support.v7.widget.Toolbar>-->
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:textColor="@color/ln_actionMenuTextColor"
-        android:textSize="@dimen/ln_toolbar_title_size" />
-</android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ln_colorProgress"
+        android:minHeight="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:transitionName="actionBar"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:id="@+id/toolbar_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/hamburger_btn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_navigation" />
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/navigation_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="New Card"
+                android:textColor="@color/button_facebook_bg"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/skip"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center|end"
+                android:paddingRight="10dp"
+                android:src="@drawable/ic_support"
+                android:textAllCaps="false" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.AppBarLayout>

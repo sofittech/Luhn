@@ -26,24 +26,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void cardDetailsRetrieved(Context luhnContext, LuhnCard creditCard, final LuhnCardVerifier cardVerifier) {
                         cardVerifier.startProgress();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                cardVerifier.requestOTP(4);
-                            }
-                        }, 2500);
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                cardVerifier.requestOTP(4);
+//                            }
+//                        }, 2500);
                     }
 
-                    @Override
-                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, String otp) {
-                        cardVerifier.startProgress();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_error));
-                            }
-                        }, 2500);
-                    }
+//                    @Override
+//                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, String otp) {
+//                        cardVerifier.startProgress();
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_error));
+//                            }
+//                        }, 2500);
+//                    }
 
                     @Override
                     public void onFinished(boolean isVerfied) {

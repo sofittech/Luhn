@@ -12,13 +12,12 @@ public final class LuhnCard implements Parcelable {
     private int expMonth, expYear;
 
 
-    public LuhnCard(String pan, String cardName, String expDate, String cvv, String pin, int expMonth, int expYear) {
+    public LuhnCard(String pan, String cardName, String expDate, String cvv, int expMonth, int expYear) {
         this.pan = pan;
         this.cardName = cardName;
         this.expMonth = expMonth;
         this.expYear = expYear;
         this.cvv = cvv;
-        this.pin = pin;
         this.expDate = expDate;
     }
 

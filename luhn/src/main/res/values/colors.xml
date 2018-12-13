@@ -18,5 +18,8 @@
     <color name="ln_verify_btn_enabled">#ff000000</color>
     <color name="ln_verify_btn_pressed">#ff3a3a48</color>
     <color name="ln_verify_btn_disabled">#ffa4a4ac</color>
-
+    <color name="button_facebook_bg">#4d6cb1</color>
+    <color name="disabled_arrow">#bbd5d5d5</color>
+    <color name="locked">#b2bcce</color>
+    <color name="button_active_bg_pressed">#48bfa9</color>
 </resources>

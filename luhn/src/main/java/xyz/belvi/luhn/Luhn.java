@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -44,7 +45,7 @@ import xyz.belvi.luhn.screens.CardVerificationProgressScreen;
 
 public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
-    private LinearLayout llBottomSheet;
+    private RelativeLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
     private CardTextInputLayout cvvInputLayout, expiryInputLayout, cardNumber, otpInputLayout;
     private PinTextInputLayout pinInputLayout;
@@ -98,7 +99,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
     }
@@ -122,12 +125,12 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     @Override
     protected void onShowKeyboard(int keyboardHeight) {
-        setButtonMargin(findViewById(R.id.btn_proceed), 0, 0, 0, 0);
+        //setButtonMargin(findViewById(R.id.btn_proceed), 0, 0, 0, 0);
     }
 
     @Override
     protected void onHideKeyboard() {
-        setButtonMargin(findViewById(R.id.btn_proceed), 16, 16, 16, 16);
+        //setButtonMargin(findViewById(R.id.btn_proceed), 16, 16, 16, 16);
     }
 
     @Override
@@ -172,14 +175,14 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
 
-    @Override
-    public void requestOTP(int otpLength) {
-        dismissProgress();
-        disableAllFields();
-        initOtp(otpLength);
-        enableNextBtn();
-        Toast.makeText(this, "Enter Otp", Toast.LENGTH_LONG).show();
-    }
+//    @Override
+//    public void requestOTP(int otpLength) {
+//        dismissProgress();
+//        disableAllFields();
+//        initOtp(otpLength);
+//        enableNextBtn();
+//        Toast.makeText(this, "Enter Otp", Toast.LENGTH_LONG).show();
+//    }
 
     @Override
     public void startProgress() {
@@ -207,9 +210,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         includeCalligraphy(fontName);
         initViews();
         retrievePin = ta.getBoolean(R.styleable.luhnStyle_luhn_show_pin, false);
-        ((AppCompatTextView) findViewById(R.id.toolbar_title)).setText(TextUtils.isEmpty(title) ? "Add Card" : title);
-        findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
-        findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.ln_colorPrimary)));
+       // ((AppCompatTextView) findViewById(R.id.toolbar_title)).setText(TextUtils.isEmpty(title) ? "Add Card" : title);
+      //  findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
+       // findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.ln_colorPrimary)));
     }
 
     private void initViews() {
@@ -223,18 +226,19 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             public void onClick(View v) {
                 hideKeyboard();
                 if (sLuhnCallback != null)
-                    if (OTP_MODE)
-                        sLuhnCallback.otpRetrieved(Luhn.this, Luhn.this, otp);
-                    else {
+//                    if (OTP_MODE)
+//                        sLuhnCallback.otpRetrieved(Luhn.this, Luhn.this, otp);
+//                    else {
                         cardPan = cardPan.replace(" ", "");
-                        sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expDate, cvv, pin, expMonth, expYear), Luhn.this);
-                    }
+                        sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expDate, cvv, expMonth, expYear), Luhn.this);
+                    //    sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expDate, cvv, pin, expMonth, expYear), Luhn.this);
+                    //}
             }
         });
     }
 
     private void initBottomSheet() {
-        llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
+        llBottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
         llBottomSheet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,9 +358,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                     @Override
                     public void onValidated(boolean moveToNext, String cvvValue) {
                         cvv = cvvValue;
-                        if (moveToNext && retrievePin)
-                            findViewById(R.id.tiet_pin_input).requestFocus();
-                        enableNextBtn();
+//                        if (moveToNext && retrievePin)
+//                            findViewById(R.id.tiet_pin_input).requestFocus();
+//                        enableNextBtn();
                     }
                 });
             }
@@ -365,55 +369,55 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
     private void initPin() {
-        pinInputLayout = (PinTextInputLayout) findViewById(R.id.ctil_pin_input);
-        pinInputLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                pinInputLayout.setVisibility(retrievePin ? View.VISIBLE : View.GONE);
-                pinInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showInfo(R.string.pin_header, R.string.pin_details, R.drawable.payment_bank_pin, false);
-
-                    }
-                });
-                pinInputLayout.getEditText().addTextChangedListener(new PinTextWatcher(pinInputLayout) {
-                    @Override
-                    public void onValidated(boolean moveToNext, String pinValue) {
-                        pin = pinValue;
-                        enableNextBtn();
-                    }
-                });
-            }
-        });
+//        pinInputLayout = (PinTextInputLayout) findViewById(R.id.ctil_pin_input);
+//        pinInputLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                pinInputLayout.setVisibility(retrievePin ? View.VISIBLE : View.GONE);
+//                pinInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        showInfo(R.string.pin_header, R.string.pin_details, R.drawable.payment_bank_pin, false);
+//
+//                    }
+//                });
+//                pinInputLayout.getEditText().addTextChangedListener(new PinTextWatcher(pinInputLayout) {
+//                    @Override
+//                    public void onValidated(boolean moveToNext, String pinValue) {
+//                        pin = pinValue;
+//                        enableNextBtn();
+//                    }
+//                });
+//            }
+//        });
 
     }
 
     private void initOtp(final int otpLength) {
-        OTP_MODE = true;
-        findViewById(R.id.ctil_otp_layout).setVisibility(View.VISIBLE);
-        otpInputLayout = (CardTextInputLayout) findViewById(R.id.ctil_otp_input);
-        otpInputLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                otpInputLayout.requestFocus();
-                showKeyboard();
-                otpInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showInfo(R.string.otp_header, R.string.otp_details, R.drawable.payment_bank_pin, false);
-
-                    }
-                });
-                otpInputLayout.getEditText().addTextChangedListener(new OTPTextWatcher(otpInputLayout, otpLength) {
-                    @Override
-                    public void onValidated(boolean moveToNext, String otpValue) {
-                        otp = otpValue;
-                        enableNextBtn();
-                    }
-                });
-            }
-        });
+//        OTP_MODE = true;
+//        findViewById(R.id.ctil_otp_layout).setVisibility(View.VISIBLE);
+//        otpInputLayout = (CardTextInputLayout) findViewById(R.id.ctil_otp_input);
+//        otpInputLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                otpInputLayout.requestFocus();
+//                showKeyboard();
+//                otpInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        showInfo(R.string.otp_header, R.string.otp_details, R.drawable.payment_bank_pin, false);
+//
+//                    }
+//                });
+//                otpInputLayout.getEditText().addTextChangedListener(new OTPTextWatcher(otpInputLayout, otpLength) {
+//                    @Override
+//                    public void onValidated(boolean moveToNext, String otpValue) {
+//                        otp = otpValue;
+//                        enableNextBtn();
+//                    }
+//                });
+//            }
+//        });
 
     }
 
@@ -443,6 +447,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
 
     private void showInfo(String header, String desc, @Nullable Drawable drawable, boolean error) {
+//        llBottomSheet.setVisibility(View.VISIBLE);
+
         hideKeyboard();
         AppCompatTextView infoHeader = (AppCompatTextView) llBottomSheet.findViewById(R.id.info_header);
         AppCompatTextView infoDesc = (AppCompatTextView) llBottomSheet.findViewById(R.id.info_desc);
