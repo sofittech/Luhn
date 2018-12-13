@@ -24,7 +24,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
     packagingOptions{
         doNotStrip '*/mips/*.so'
         doNotStrip '*/mips64/*.so'
